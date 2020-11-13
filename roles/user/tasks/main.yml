@@ -5,9 +5,6 @@
   become: yes
 
 
-
-
-
 - name: Add user
   user: 
     name: "{{ user }}"
@@ -24,7 +21,7 @@
     path: "{{home_folder}}/{{item}}"
     state: directory
     mode: 0750
-  with_items: [".ssh",".tmux",".vim",".aws"]
+  with_items: [".ssh",".tmux",".vim",".aws",".fonts"]
   become_user: "{{ user }}"
 
 
@@ -32,5 +29,27 @@
   unarchive:
     src: bashrc.tar.gz
     dest: "{{ home_folder }}"
+  become_user: "{{ user }}"
+
+
+- name: Unarchive fonts
+  unarchive:
+    src: Open_Sans.zip
+    dest: "{{ home_folder}}/.fonts"
+  become_user: "{{ user }}"
+
+- name: Execute fc-cache for fonts
+  command: fc-cache -fv
+  become_user: "{{ user }}"
+
+
+- name: Copy terminal file
+  copy:
+    src: "{{ role_path }}/files/railscasts.dark.sh"
+    dest: "{{ home_folder }}"
+  become_user: "{{ user }}"
+
+- name: Execute terminal addition
+  command: sh "{{ home_folder}}/railscasts.dark.sh" 
   become_user: "{{ user }}"
 
