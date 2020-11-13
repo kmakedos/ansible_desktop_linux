@@ -1,2 +1,25 @@
 user: kostas
 home_folder: "/home/{{ user }}"
+basic_packages:
+    - vim
+    - tmux
+    - cowsay
+    - fortune-mod
+    - sudo
+    - wget
+   
+development_packages:
+    - gcc
+    - cmake
+    - clang
+    - g++
+    - git
+    - python3
+    - jq
+
+network_packages:
+    - netcat
+    - socat
+    - nmap
+    - curl
+

@@ -1,6 +1,23 @@
-- name: Install packages
+- name: Install very basic packages
   package:
       name: "{{ item }}"
       state: present
-  with_items: ["vim", "tmux", "cowsay", "fortune-mod"]
+  with_items: "{{ basic_packages }}"
   become: yes
+
+
+- name: Install development packages
+  package:
+      name: "{{ item }}"
+      state: present
+  with_items: "{{ development_packages }}"
+  become: yes
+
+- name: Install network packages
+  package:
+      name: "{{ item }}"
+      state: present
+  with_items: "{{ network_packages }}"
+  become: yes
+
+
