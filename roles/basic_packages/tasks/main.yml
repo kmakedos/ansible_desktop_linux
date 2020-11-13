@@ -1,0 +1,6 @@
+- name: Install packages
+  package:
+      name: "{{ item }}"
+      state: present
+  with_items: ["vim", "tmux", "cowsay", "fortune-mod"]
+  become: yes

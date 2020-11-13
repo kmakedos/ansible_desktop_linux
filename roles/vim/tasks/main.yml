@@ -1,9 +1,3 @@
-- name: Install vim
-  package:
-    name: vim
-    state: latest
-  become: yes
-
 - name: Remove old vim
   file:
     path: "{{ item }}"
