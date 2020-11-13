@@ -10,14 +10,49 @@
   package:
       name: "{{ item }}"
       state: present
-  with_items: "{{ development_packages }}"
+  with_items: "{{ development_packages.common }}"
   become: yes
 
 - name: Install network packages
   package:
       name: "{{ item }}"
       state: present
-  with_items: "{{ network_packages }}"
+  with_items: "{{ network_packages.common }}"
   become: yes
+
+- name: Install development packages for Ubuntu
+  package:
+      name: "{{ item }}"
+      state: present
+  with_items: "{{ development_packages.ubuntu }}"
+  become: yes
+  when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu"
+
+- name: Install network packages for Ubuntu
+  package:
+      name: "{{ item }}"
+      state: present
+  with_items: "{{ network_packages.ubuntu }}"
+  become: yes
+  when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu"
+
+
+    
+- name: Install network packages for Fedora
+  package:
+      name: "{{ item }}"
+      state: present
+  with_items: "{{ network_packages.fedora }}"
+  become: yes
+  when: ansible_distribution == "CentOS" or ansible_distribution == "Fedora"
+
+- name: Install development packages for Fedora
+  package:
+      name: "{{ item }}"
+      state: present
+  with_items: "{{ development_packages.fedora }}"
+  become: yes
+  when: ansible_distribution == "CentOS" or ansible_distribution == "Fedora"
+
 
 

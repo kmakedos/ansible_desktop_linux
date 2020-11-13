@@ -9,6 +9,7 @@ basic_packages:
     - wget
    
 development_packages:
+  common:
     - gcc
     - cmake
     - clang
@@ -16,10 +17,19 @@ development_packages:
     - git
     - python3
     - jq
+  ubuntu:
+    - libboost-dev-all
+  fedora: 
+    - boost
+    - boost-devel
+
 
 network_packages:
-    - netcat
+  common:
     - socat
     - nmap
     - curl
-
+  ubuntu:
+    - netcat
+  fedora:
+    - nc
