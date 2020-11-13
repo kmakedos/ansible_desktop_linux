@@ -1,0 +1,31 @@
+- name: Install vim
+  package:
+    name: vim
+    state: latest
+  become: yes
+
+- name: Remove old vim
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items: [".vim", ".vimrc"]
+  become_user: "{{ user }}"
+
+ 
+- name: Extract vim
+  unarchive:
+    src: vim.tar.gz
+    dest: "{{ home_folder }}"
+  become_user: "{{ user }}"
+
+
+- name: Extract vundle
+  unarchive:
+    src: vundle.tar.gz
+    dest: "{{ home_folder }}/.vim/bundle"
+  become_user: "{{ user }}"
+
+
+
+
+  

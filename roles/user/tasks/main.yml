@@ -1,0 +1,36 @@
+- name: Add group
+  user: 
+    name: "{{ item }}"
+  with_items: ["admin", "wheel"]
+  become: yes
+
+
+
+
+
+- name: Add user
+  user: 
+    name: "{{ user }}"
+    comment: "{{ comment | default('') }}"
+    groups: admin,wheel
+    generate_ssh_key: "{{ generate_ssh | default('yes') }}"
+  become: yes
+
+
+
+
+- name: Ensure basic folders exist
+  file:
+    path: "{{home_folder}}/{{item}}"
+    state: directory
+    mode: 0750
+  with_items: [".ssh",".tmux",".vim",".aws"]
+  become_user: "{{ user }}"
+
+
+- name: Copy bashrc
+  unarchive:
+    src: bashrc.tar.gz
+    dest: "{{ home_folder }}"
+  become_user: "{{ user }}"
+

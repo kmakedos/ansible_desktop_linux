@@ -1,0 +1,2 @@
+user: kostas
+home_folder: "/home/{{ user }}"
