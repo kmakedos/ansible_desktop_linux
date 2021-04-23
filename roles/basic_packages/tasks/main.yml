@@ -1,26 +1,41 @@
-- name: Install very basic packages
+- name: Install common basic packages
   package:
       name: "{{ item }}"
       state: present
-  with_items: "{{ basic_packages }}"
+  with_items: "{{ basic_packages.common }}"
   become: yes
 
+- name: Install basic packages for Ubuntu/Debian
+  package:
+      name: "{{ item }}"
+      state: present
+  with_items: "{{ basic_packages.ubuntu }}"
+  become: yes
+  when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu"
 
-- name: Install development packages
+- name: Install basic packages for Fedora/CentOS
+  package:
+      name: "{{ item }}"
+      state: present
+  with_items: "{{ basic_packages.fedora }}"
+  become: yes
+  when: ansible_distribution == "CentOS" or ansible_distribution == "Fedora"
+
+- name: Install common development packages
   package:
       name: "{{ item }}"
       state: present
   with_items: "{{ development_packages.common }}"
   become: yes
 
-- name: Install network packages
+- name: Install common network packages
   package:
       name: "{{ item }}"
       state: present
   with_items: "{{ network_packages.common }}"
   become: yes
 
-- name: Install development packages for Ubuntu
+- name: Install development packages for Ubuntu/Debian
   package:
       name: "{{ item }}"
       state: present
@@ -28,7 +43,7 @@
   become: yes
   when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu"
 
-- name: Install network packages for Ubuntu
+- name: Install network packages for Ubuntu/Debian
   package:
       name: "{{ item }}"
       state: present
@@ -38,7 +53,7 @@
 
 
     
-- name: Install network packages for Fedora
+- name: Install network packages for Fedora/CentOS
   package:
       name: "{{ item }}"
       state: present
@@ -46,7 +61,7 @@
   become: yes
   when: ansible_distribution == "CentOS" or ansible_distribution == "Fedora"
 
-- name: Install development packages for Fedora
+- name: Install development packages for Fedora/CentOS
   package:
       name: "{{ item }}"
       state: present

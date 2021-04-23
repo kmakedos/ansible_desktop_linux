@@ -1,12 +1,17 @@
 user: kostas
 home_folder: "{{ansible_env.HOME}}"
 basic_packages:
-    - vim-nox
+  common:
     - tmux
     - cowsay
     - fortune-mod
     - sudo
     - wget
+  ubuntu:
+    - vim-nox
+  fedora:
+    - vim
+
    
 development_packages:
   common:
