@@ -1,7 +1,7 @@
 user: kostas
-home_folder: "/home/{{ user }}"
+home_folder: "{{ansible_env.HOME}}"
 basic_packages:
-    - vim
+    - vim-nox
     - tmux
     - cowsay
     - fortune-mod

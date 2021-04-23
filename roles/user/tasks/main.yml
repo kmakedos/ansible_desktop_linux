@@ -1,7 +1,7 @@
 - name: Add group
   user: 
     name: "{{ item }}"
-  with_items: ["admin", "wheel"]
+  with_items: ["admin", "wheel", "sudo", "docker"]
   become: yes
 
 
@@ -9,7 +9,7 @@
   user: 
     name: "{{ user }}"
     comment: "{{ comment | default('') }}"
-    groups: admin,wheel
+    groups: [admin, wheel, sudo, docker]
     generate_ssh_key: "{{ generate_ssh | default('yes') }}"
   become: yes
 
