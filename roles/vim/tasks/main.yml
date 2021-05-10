@@ -5,17 +5,23 @@
   with_items: [".vim", ".vimrc"]
   become_user: "{{ user }}"
 
+- name: Create vundle folder
+  file:
+   path: ~/.vim/bundle
+   state: directory
+  become_user: "{{ user }}"
+
  
 - name: Extract vim
   unarchive:
-    src: vim.tar.gz
+    src: vim.zip
     dest: "{{ home_folder }}"
   become_user: "{{ user }}"
 
 
 - name: Extract vundle
   unarchive:
-    src: vundle.tar.gz
+    src: vundle.zip
     dest: "{{ home_folder }}/.vim/bundle"
   become_user: "{{ user }}"
 

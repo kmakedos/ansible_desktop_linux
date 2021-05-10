@@ -3,6 +3,7 @@
     name: "{{ item }}"
   with_items: ["admin", "wheel", "sudo", "docker"]
   become: yes
+  when: ansible_distribution == "CentOS" or ansible_distribution == "Fedora"
 
 
 - name: Add user
@@ -12,6 +13,8 @@
     groups: [admin, wheel, sudo, docker]
     generate_ssh_key: "{{ generate_ssh | default('yes') }}"
   become: yes
+  when: ansible_distribution == "CentOS" or ansible_distribution == "Fedora"
+
 
 
 
@@ -27,7 +30,7 @@
 
 - name: Copy bashrc
   unarchive:
-    src: bashrc.tar.gz
+    src: bashrc.zip
     dest: "{{ home_folder }}"
   become_user: "{{ user }}"
 

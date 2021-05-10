@@ -1,6 +1,6 @@
 - hosts: target
   roles:
-    - role: basic_packages
+#    - role: basic_packages
     - role: user
     - role: vim
 
